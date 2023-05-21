@@ -1,0 +1,95 @@
+{% extends 'html/reports.html' %}
+{% load static %}
+{% block reporttitle %}Proprietors{% endblock reporttitle %}
+{% block reportbodycontent %}
+{% if user.is_staff %}
+<script>
+    myarr = document.getElementsByTagName('a');
+    for (let i=0;i<myarr.length;i++){
+      myarr[i].classList.remove('active');
+    }
+   myarr[10].classList.add('active');  
+</script>
+{% else %}
+<script>
+    myarr = document.getElementsByTagName('a');
+    for (let i=0;i<myarr.length;i++){
+      myarr[i].classList.remove('active');
+    }
+   myarr[10].classList.add('active');  
+</script>
+{% endif %}
+<script>
+    myarr[2].classList.add("active");
+</script>
+{% if prprecords %}
+<div class="table-responsive mt-2" style="font-family: 'Gotu',sans-serif;">
+    <table class="table table-hover table-striped table-bordered" id="ProprietorRecords">
+        <thead class="table-dark border-warning">
+            <tr class="align-middle text-center fw-bold">
+                <th class="col">Proprietor ID</th>
+                <th class="col">Plot Number</th>
+                <th class="col">Plot Owner</th>
+                <th class="col">License Holder</th>
+                <th class="col">Shop Name</th>
+                <th class="col">Email ID</th>
+                <th class="col">Phone Number</th>
+                <th class="col">Aadhar Number</th>
+                <th class="col">Date Of Birth</th>
+                <th class="col">Aadtye</th>
+                <th class="col">AClass</th>
+                <th class="col">Processing</th>
+                <th class="col">Hamal</th>
+                <th class="col">Recorded By</th>
+            </tr>
+        </thead>
+        <tbody class="table-light border-warning" id="proprietorrecord">
+            {% for prrecord in prprecords %}            
+            <tr class="align-middle">
+                <td>{{prrecord.PropID}}</td>
+                <td>{{prrecord.PlotNumber}}</td>
+                <td>{{prrecord.PlotOwner}}</td>
+                <td>{{prrecord.LicenseHolder}}</td>
+                <td>{{prrecord.ShopName}}</td>
+                <td>{{prrecord.EmailID}}</td>
+                <td>{{prrecord.PhoneNumber}}</td>
+                <td>{{prrecord.AadharNumber}}</td>
+                <td>{{prrecord.DateOfBirth}}</td>
+                <td>
+                    {% if prrecord.Aadtye == 1 %}
+                    Aadtye
+                    {% else %}
+                    
+                    {% endif %}
+                </td>
+                <td>
+                    {% if prrecord.AClass == 1 %}
+                    AClass
+                    {% else %}
+                    
+                    {% endif %}
+                </td>
+                <td>
+                    {% if prrecord.Processing == 1 %}
+                    Processing
+                    {% else %}
+                    
+                    {% endif %}
+                </td>
+                <td>
+                    {% if prrecord.Hamal == 1 %}
+                    Hamal
+                    {% else %}
+                    
+                    {% endif %}
+                </td> 
+                <td>{{prrecord.RecordedBy}}</td>             
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>    
+        </tfoot>
+    </table>    
+</div>
+{% endif %}
+{% endblock reportbodycontent %}

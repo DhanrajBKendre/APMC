@@ -1,0 +1,207 @@
+{% extends 'html/reports.html' %} 
+{% load static %} 
+{% block reporttitle %}Financial Aspects{% endblock reporttitle %} 
+{% block reportbodycontent %} 
+{% if user.is_staff %}
+<script>
+  myarr = document.getElementsByTagName("a");
+  for (let i = 0; i < myarr.length; i++) {
+    myarr[i].classList.remove("active");
+  }
+  myarr[12].classList.add("active");
+</script>
+{% else %}
+<script>
+  myarr = document.getElementsByTagName("a");
+  for (let i = 0; i < myarr.length; i++) {
+    myarr[i].classList.remove("active");
+  }
+  myarr[11].classList.add("active");
+</script>
+{% endif %}
+<script>
+  myarr[2].classList.add("active");
+</script>
+<div class="container">
+  <form action="/reports/finance" method="post" class="mt-3">
+    {% csrf_token %}
+    <h3 class="text-center">Get Report By Following Criteria</h3>
+    <div class="row mb-3">
+      <div class="col-md-6 col-12">
+        Start Date:
+        <input
+          type="date"
+          name="startdate"
+          id="startdate"
+          class="form-control"
+        />
+      </div>
+      <div class="col-md-6 col-12">
+        End Date:
+        <input type="date" name="enddate" id="enddate" class="form-control"/>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6 col-12">
+        License Holder:
+        <input
+          type="text"
+          name="filicenseholder"
+          id="filicenseholder"
+          class="form-control"
+        />
+      </div>
+      <div class="col-md-6 col-12">
+        Recorded By:
+        <input
+          type="text"
+          name="firecordedby"
+          id="firecordedby"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-12">
+        Aadhar Number
+        <input type="text" name="fiaadhar" id="fiaadhar" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-12">
+        <select name="selectoption" id="selectoption" class="form-select" multiple aria-multiselectable="true">
+          <option value="choose">Choose From The Options Below</option>
+          <option value="Date">Date</option>
+          <option value="License Holder">License Holder</option>
+          <option value="Recorded By">Recorded By</option>
+          <option value="Aadhar Number">Aadhar Number</option>
+        </select>
+      </div>
+      <div class="col-md-2 col-12">
+        <button type="submit" class="btn btn-success w-100">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% if financetable %}
+<div class="table-responsive mt-2" style="font-family: 'Gotu', sans-serif">
+  <table class="table table-hover table-bordered" id="InvoiceRecords">
+    <thead class="table-dark border-warning">
+      <tr class="align-middle text-center fw-bold">
+        <th class="col">Transaction Number</th>
+        <th class="col">Proprietor ID</th>
+        <th class="col">License Holder's Name</th>
+        <th class="col">Date</th>
+        <th class="col">Year</th>
+        <th class="col">License Fees Aadtye</th>
+        <th class="col">License Fees AClass</th>
+        <th class="col">License Fees Processing</th>
+        <th class="col">License Fees Hamal</th>
+        <th class="col">License Renewal Fees Aadtye</th>
+        <th class="col">License Renewal Fees AClass</th>
+        <th class="col">License Renewal Fees Processing</th>
+        <th class="col">License Renewal Fees Hamal</th>
+        <th class="col">Plot Rent</th>
+        <th class="col">Market Fees (Main)</th>
+        <th class="col">Market Fees (Secondary)</th>
+        <th class="col">Supervision Fees</th>
+        <th class="col">Form Fees</th>
+        <th class="col">Tavan / Penalty</th>
+        <th class="col">Late Fees</th>
+        <th class="col">License Form Fees</th>
+        <th class="col">Shopping Complex Rent</th>
+        <th class="col">Hishob Patti Book</th>
+        <th class="col">Bill Book</th>
+        <th class="col">Pohonch Pavati</th>
+        <th class="col">Other Fees</th>
+        <th class="col">NA Tax</th>
+        <th class="col">Total Fees</th>
+        <th class="col">Cash</th>
+        <th class="col">Cheque</th>
+        <th class="col">Cheque Number</th>
+        <th class="col">UPI</th>
+        <th class="col">Recorded By</th>
+      </tr>
+    </thead>
+    <tbody class="table-light border-warning" id="financedata">
+      {% for firecord in financetable %}
+      <tr class="align-middle">
+        <td>{{firecord.IRTransactionNumber}}</td>
+        <td>{{firecord.IRProprietorID}}</td>
+        <td class="lname">{{firecord.IRLicenseHolderName}}</td>
+        <td class="ldate">{{firecord.IRDate}}</td>
+        <td>{{firecord.IRYear}}</td>
+        <td>{{firecord.IRLicenseFeesAadtye}}</td>
+        <td>{{firecord.IRLicenseFeesAClass}}</td>
+        <td>{{firecord.IRLicenseFeesProcessing}}</td>
+        <td>{{firecord.IRLicenseFeesHamal}}</td>
+        <td>{{firecord.IRLicenseRenewalFeesAadtye}}</td>
+        <td>{{firecord.IRLicenseRenewalFeesAClass}}</td>
+        <td>{{firecord.IRLicenseRenewalFeesProcessing}}</td>
+        <td>{{firecord.IRLicenseRenewalFeesHamal}}</td>
+        <td>{{firecord.IRPlotRent}}</td>
+        <td>{{firecord.IRMarketFeesMain}}</td>
+        <td>{{firecord.IRMarketFeesSecondary}}</td>
+        <td>{{firecord.IRSupervisionFees}}</td>
+        <td>{{firecord.IRFormFees}}</td>
+        <td>{{firecord.IRTavanPenalty}}</td>
+        <td>{{firecord.IRLateFees}}</td>
+        <td>{{firecord.IRLicenseFormFees}}</td>
+        <td>{{firecord.IRShoppingComplexRent}}</td>
+        <td>{{firecord.IRHishobPattiBook}}</td>
+        <td>{{firecord.IRBillBook}}</td>
+        <td>{{firecord.IRPohonchPavati}}</td>
+        <td>{{firecord.IROtherFees}}</td>
+        <td>{{firecord.IRNATax}}</td>
+        <td>{{firecord.IRTotalFees}}</td>
+        <td>{% if firecord.IRCash == 1 %}Cash{% else %}{% endif %}</td>
+        <td>{% if firecord.IRCheque == 1 %}Cheque{% else %}{% endif %}</td>
+        <td>{{firecord.IRChequeNumber}}</td>
+        <td>{% if firecord.IRUPI == 1 %}UPI{% else %}{% endif %}</td>
+        <td>{{firecord.IRRecordedBy}}</td>
+        {% endfor %}
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5">Total Sum</td>
+                <td id="tcount5"></td>
+                <td id="tcount6"></td>
+                <td id="tcount7"></td>
+                <td id="tcount8"></td>
+                <td id="tcount9"></td>
+                <td id="tcount10"></td>
+                <td id="tcount11"></td>
+                <td id="tcount12"></td>
+                <td id="tcount13"></td>
+                <td id="tcount14"></td>
+                <td id="tcount15"></td>
+                <td id="tcount16"></td>
+                <td id="tcount17"></td>
+                <td id="tcount18"></td>
+                <td id="tcount19"></td>
+                <td id="tcount20"></td>
+                <td id="tcount21"></td>
+                <td id="tcount22"></td>
+                <td id="tcount23"></td>
+                <td id="tcount24"></td>
+                <td id="tcount25"></td>
+                <td id="tcount26"></td>
+                <td id="tcount27"></td>
+                <td id="tcount28">Cash Total</td>
+                <td id="tcount29">Cheque Total</td>
+                <td>-</td>
+                <td id="tcount31">UPI Total</td>
+                <td>-</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+{% endif %}
+<div class="container-fluid fs-1 m-1 p-1 text-center">
+  <p id="statements">The amount collected from <span id="lhname" class="fw-semibold"></span> from <span id="lhsdate" class="fw-semibold"></span> to <span id="lhedate" class="fw-semibold"></span> is ₹<span id="lhamount" class="fw-semibold"></span></p>
+</div>
+<script src="{% static 'js/finance.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/reportfinance.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/financereport.js' %}" type="text/javascript"></script>
+{% endblock reportbodycontent %}

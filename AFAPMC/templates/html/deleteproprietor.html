@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Delete Proprietor{% endblock title %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block bodycontent %}
+{% if user.is_staff %}
+<script>
+  myarr = document.getElementsByTagName('a');
+  for (let i=0;i<myarr.length;i++){
+    myarr[i].classList.remove('active');
+  }
+ myarr[8].classList.add('active');
+</script>
+{% else %}
+<script>
+  myarr = document.getElementsByTagName('a');
+  for (let i=0;i<myarr.length;i++){
+    myarr[i].classList.remove('active');
+  }
+ myarr[6].classList.add('active');
+</script>
+{% endif %}
+{% if i %}
+<div class="container-fluid">
+    <div class="m-3">
+            <p class="text-center fs-3">{{i.LicenseHolder}}</p>
+    </div>
+</div>
+
+<div class="container-fluid table-responsive">
+    <table class="table table-success table-striped table-hover">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Attribute</th>
+          <th scope="col">Property</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Proprietor's ID</td>
+          <td>{{i.PropID}}</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Plot Number</td>
+          <td>{{i.PlotNumber}}</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Plot Owner's Name</td>
+          <td>{{i.PlotOwner}}</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>License Holder's Name</td>
+          <td>{{i.LicenseHolder}}</td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Shop's Name</td>
+          <td>{{i.ShopName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">6</th>
+          <td>Email ID</td>
+          <td>{{i.EmailID}}</td>
+        </tr>
+        
+        <tr>
+          <th scope="row">7</th>
+          <td>Phone Number</td>
+          <td>{{i.PhoneNumber}}</td>
+        </tr>
+
+        <tr>
+          <th scope="row">8</th>
+          <td>Aadhar Number</td>
+          <td>{{i.AadharNumber}}</td>
+        </tr>
+        <tr>
+          <th scope="row">9</th>
+          <td>Date Of Birth</td>
+          <td>{{i.DateOfBirth}}</td>
+        </tr>
+
+        <tr>
+          <th scope="row">10</th>
+          <td>License Type</td>
+          <td>
+            {% if i.Aadtye == 1 %}
+          Aadtye,
+          {% else %}
+
+          {% endif %}
+          {% if i.AClass == 1 %}
+          A-Class,
+          {% else %}
+          
+          {% endif %}
+          {% if i.Processing == 1 %}
+          Processing,
+          {% else %}
+          
+          {% endif %}
+          {% if i.Hamal == 1 %}
+          Hamal
+          {% else %}
+          
+          {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">11</th>
+          <td>Record Created By</td>
+          <td>{{i.RecordedBy}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2" class="text-center table-warning">
+              Are you sure want to delete this record? If Yes, Click 'Delete'
+          </td>
+          <td colspan="1">
+              <form action="/deleteproprietor/{{i.id}}" method="POST">
+                {% csrf_token %}
+                  <button type="submit" class="btn btn-warning w-100 text-center">
+                      Delete
+                  </button>
+              </form>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    {% endif %}
+</div>
+
+{% endblock bodycontent %}

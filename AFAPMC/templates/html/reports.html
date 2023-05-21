@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Reports | {% block reporttitle %}{% endblock reporttitle %} {% endblock title %}
+{% block styleincludes %}
+{% endblock styleincludes %}
+{% block bodycontent %}
+<script>
+    document.getElementById('navpills').style.display = "none";
+</script>
+<script>
+  myarr = document.getElementsByTagName("a");
+  for (let i = 0; i < myarr.length; i++) {
+      myarr[i].classList.remove("active");
+  }
+  myarr[2].classList.add("active");
+</script>
+<div class="bg-dark">
+    <ul class="nav nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link text-white text-decoration-none" href="{% url 'ACC:precords' %}">Proprietors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white text-decoration-none" href="{% url 'ACC:rirecords' %}">Invoice Records</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white text-decoration-none" href="{% url 'ACC:refinance' %}">Financial Aspects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white text-decoration-none" href="{% url 'ACC:retally' %}">Tally</a>
+      </li>
+    </ul>
+  </div>
+{% block reportbodycontent %}{% endblock reportbodycontent %}
+{% endblock bodycontent %}

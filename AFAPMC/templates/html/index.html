@@ -1,0 +1,123 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}HOME{% endblock title %} 
+{% block stylesheets %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Righteous&display=swap" rel="stylesheet">
+<!-- font-family: 'Bruno Ace SC', cursive; font-family: 'Righteous', cursive; -->
+{% endblock stylesheets %} 
+{% block bodycontent %}
+<script>
+  myarr = document.getElementsByTagName("a");
+  for (let i = 0; i < myarr.length; i++) {
+      myarr[i].classList.remove("active");
+  }
+  myarr[1].classList.add("active");
+</script>
+<div class="container-fluid my-2 py-2" style="background-image: url(../../static/images/base/img_1.jpg);background-repeat: no-repeat;background-size: cover; height: 75vh; color: white;">
+  <div class="position-relative" style="top:33%;">
+    <div class="fs-3 text-center" style="font-family: 'Bruno Ace SC', cursive; color:#e9d338;">
+      ACCOUNTING CUM MANAGEMENT SYSTEM
+    </div>
+    <div class="fs-5 text-center">
+      FOR
+    </div>
+    <div class="fs-4 text-center" style="font-family: 'Bruno Ace SC', cursive; color:#ff5503;">
+      AGRICULTURAL PRODUCE MARKET COMITTEE
+    </div>
+  </div>
+</div>
+<div class="container-fluid my-2 py-2">
+  <h2
+    class="text-center bg-success text-white py-1"
+    style="border-radius: 25px"
+  >
+    APMC's
+  </h2>
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingOne">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne"
+          aria-expanded="false"
+          aria-controls="flush-collapseOne"
+        >
+          What is APMC?
+        </button>
+      </h2>
+      <div
+        id="flush-collapseOne"
+        class="accordion-collapse collapse"
+        aria-labelledby="flush-headingOne"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          APMC means the Agricultural Produce & Livestock Market Committee
+          established under the provisions of APLM Act.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingTwo">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseTwo"
+          aria-expanded="false"
+          aria-controls="flush-collapseTwo"
+        >
+          What is APMC Yard?
+        </button>
+      </h2>
+      <div
+        id="flush-collapseTwo"
+        class="accordion-collapse collapse"
+        aria-labelledby="flush-headingTwo"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          Agricultural Produce Market Committee (APMC) Yard / Regulated Market
+          Committees (RMC) Yard is any place in the market area managed by a
+          Market Committee, for the purpose of regulation of marketing of
+          notified agricultural produce and livestock in physical, electronic or
+          other such mode. - The place shall include any structure, enclosure,
+          open space locality,street including warehouse/silos/pack
+          house/cleaning, grading, packaging and processing unit present inthe
+          Market Committee of the defined market area.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingThree">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseThree"
+          aria-expanded="false"
+          aria-controls="flush-collapseThree"
+        >
+          What is this Accounting System For APMC?
+        </button>
+      </h2>
+      <div
+        id="flush-collapseThree"
+        class="accordion-collapse collapse"
+        aria-labelledby="flush-headingThree"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          This is an automated accounting system software that can streamline
+          financial management tasks, improve data accuracy, and provide
+          real-time financial reporting.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock bodycontent %}

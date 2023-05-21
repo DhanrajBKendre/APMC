@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Further Information{% endblock title %}
+
+{% block bodycontent %}
+<div class="container d-flex justify-content-between">
+    <a href="/" class="btn btn-primary text-center fs-4 m-2 p-2"> <span class="bi bi-arrow-return-left">Back To Home</span></a>
+    <a href="/searchproprietor" class="btn btn-primary text-center fs-4 m-2 p-2"> <span class="bi bi-arrow-return-left">Back To Search</span></a>
+    
+    {% if user.is_staff %}
+    <a href="/reports" class="btn btn-primary text-center fs-4 m-2 p-2"> <span class="bi bi-arrow-return-left">Back To Reports</span></a>
+    {% endif %}
+</div>
+{% endblock bodycontent %}

@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create Invoice{% endblock title %}
+{% block bodycontent %}
+
+{% if user.is_staff %}
+<script>
+    myarr = document.getElementsByTagName('a');
+    for (let i=0;i<myarr.length;i++){
+      myarr[i].classList.remove('active');
+    }
+   myarr[9].classList.add('active');  
+</script>
+{% else %}
+<script>
+    myarr = document.getElementsByTagName('a');
+    for (let i=0;i<myarr.length;i++){
+      myarr[i].classList.remove('active');
+    }
+   myarr[7].classList.add('active');  
+</script>
+{% endif %}
+<script>
+    function visibleqrcode() {
+        var x = document.getElementById("qrcode");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function findTotal(){
+        var arr = document.getElementsByClassName('amount');
+        var tot=0;
+        for(var i=0;i<arr.length;i++){
+            if(parseInt(arr[i].value))
+                tot += parseInt(arr[i].value);
+        }
+        document.getElementById('citotalfees').value = `${tot}`;
+    }
+</script>
+<div class="container-fluid">
+        <h2 class="text-center text-dark my-3">APMC</h2>
+        {% if i %}
+        <div class="d-flex flex-wrap justify-content-around mb-3">
+            <div class="col-4">
+                License Holder's Name
+            </div>
+            <div class="col-8">
+                {{i.LicenseHolder}}
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-around mb-3">
+            <div class="col-4">
+                Shop's Name
+            </div>
+            <div class="col-8">
+                {{i.ShopName}}
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-around mb-3">
+            <div class="col-4">
+                Date
+            </div>
+            <div class="col-8">
+                {{today}}
+            </div>
+        </div>
+        {% endif %}
+        <div class="text-center">
+            <p>Acquired For Year <span>{{pyear}}-{{cyear}}</span> From Him/Her As Per Following Details:</p>
+        </div>
+        <div class="container-fluid">
+            <form action="/createinvoice/{{i.id}}" method="POST">
+                {% csrf_token %}
+                <div class="row mt-2 mb-2">
+                    <div class="col-md-3">
+                        License Fees Aadtye
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicensefeesaadtye" id="cilicensefeesaadtye">
+                    </div>
+                    <div class="col-md-3">
+                        License Fees A-Class
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicensefeesaclass" id="cilicensefeesaclass">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        License Fees Processing
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicensefeesprocessing" id="cilicensefeesprocessing">
+                    </div>
+                    <div class="col-md-3">
+                        License Fees Hamal
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicensefeeshamal" id="cilicensefeeshamal">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        License Renewal Fees Aadtye
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicenserenewalfeesaadtye" id="cilicenserenewalfeesaadtye">
+                    </div>
+                    <div class="col-md-3">
+                        License Renewal Fees A-Class
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicenserenewalfeesaclass" id="cilicenserenewalfeesaclass">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        License Renewal Fees Processing
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicenserenewalfeesprocessing" id="cilicenserenewalfeesprocessing">
+                    </div>
+                    <div class="col-md-3">
+                        License Renewal Fees Hamal
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicenserenewalfeeshamal" id="cilicenserenewalfeeshamal">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        Plot Rent
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="ciplotrent" id="ciplotrent">
+                    </div>
+                    <div class="col-md-3">
+                        Market Fees Main
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cimarketfeesmain" id="cimarketfeesmain">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        Market Fees Secondary
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cimarketfeessecondary" id="cimarketfeessecondary">
+                    </div>
+                    <div class="col-md-3">
+                        Supervision Fees
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cisupervisionfees" id="cisupervisionfees">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        Form Fees
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="ciformfees" id="ciformfees">
+                    </div>
+                    <div class="col-md-3">
+                        Tavan / Penalty
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="citavanpenalty" id="citavanpenalty">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        Late Fees
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilatefees" id="cilatefees">
+                    </div>
+                    <div class="col-md-3">
+                        License Form Fees
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cilicenseformfees" id="cilicenseformfees">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        Shopping Complex Rent
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cishoppingcomplexrent" id="cishoppingcomplexrent">
+                    </div>
+                    <div class="col-md-3">
+                        Hishob Patti Book
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cihishobpattibook" id="cihishobpattibook">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        Bill Book
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cibillbook" id="cibillbook">
+                    </div>
+                    <div class="col-md-3">
+                        Pohonch Pavati
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cipohonchpavati" id="cipohonchpavati">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        Other Fees
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="ciotherfees" id="ciotherfees">
+                    </div>
+                    <div class="col-md-3">
+                        NA Tax
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="amount" oninput="findTotal()" name="cinatax" id="cinatax">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <input type="checkbox" name="cicash" id="cicash" class="mx-1">
+                            <label for="cicash">Cash</label>
+                            <input type="checkbox" name="cicheque" id="cicheque" class="mx-1">
+                            <label for="cichque">Cheque</label>
+                            <input type="checkbox" name="ciupi" id="ciupi" class="mx-1">
+                            <label for="ciupi">UPI</label>
+                        </div>
+                        <input type="text" name="cichequenumber" id="cichequenumber" placeholder="Enter Your Check Number Here" class="my-1 w-100 text-center">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">Total Fees (in ₹)</div>
+                        <input type="text" name="citotalfees" id="citotalfees" class="w-100 my-1">
+                    </div>
+                    <div class="col-md-4">
+                        <p onclick="visibleqrcode()" class="btn btn-light w-100 border-dark border-1 mt-3"> <span class="mx-2"><img src="{% static 'images/invoice/google-pay.png' %}" alt="" width="40" height="25"></span>Scan QR To Pay</p>
+                    </div>
+                    <div class="text-center" id="qrcode" style="display: none;">
+                        <img src="{% static 'images/invoice/gpayscan.jpg' %}" alt="" width="150" height="150">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <button type="submit" class="btn btn-success py-2 w-100 text-center fs-4">Save Receipt</button>
+                </div>
+            </form>
+        </div>
+</div>
+{% endblock bodycontent %}

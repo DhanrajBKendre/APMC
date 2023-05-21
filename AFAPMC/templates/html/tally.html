@@ -1,0 +1,294 @@
+{% extends 'html/reports.html' %} 
+{% load static %} 
+{% block reporttitle %}Tally Report{% endblock reporttitle %} 
+{% block reportbodycontent %} 
+{% if user.is_staff %}
+<script>
+  myarr = document.getElementsByTagName("a");
+  for (let i = 0; i < myarr.length; i++) {
+    myarr[i].classList.remove("active");
+  }
+  myarr[13].classList.add("active");
+</script>
+{% else %}
+<script>
+  myarr = document.getElementsByTagName("a");
+  for (let i = 0; i < myarr.length; i++) {
+    myarr[i].classList.remove("active");
+  }
+  myarr[13].classList.add("active");
+</script>
+{% endif %}
+<script>
+  myarr[2].classList.add("active");
+</script>
+<div class="container-fluid">
+  <div class="d-flex justify-content-around">
+    <div>
+        01 April, 2023
+    </div>
+    <div>
+      To
+    </div>
+    <div>
+        31 March, 2024
+    </div>
+  </div>
+</div>
+{% for i in resdf %}
+<div>
+  <details class="mb-1">
+    <summary class="row bg-danger text-white py-1 mx-1">
+      <span class="col-9">{{i.IRLicenseHolderName}}</span>
+      <span class="col-3">{{i.IRTotalFees}} <span class="bi bi-caret-down-fill"></span> </span>
+    </summary>
+    {% if i.IRLicenseFeesAadtye != 0 %}
+    <div class="row mx-1">
+      <span class="col-9">License Fees Aadtye</span>
+      <span class="col-3">{{i.IRLicenseFeesAadtye}}</span>
+    </div>  
+    {% else %}
+    <div class="row mx-1 d-none">
+      <span class="col-9">License Fees Aadtye</span>
+      <span class="col-3">{{i.IRLicenseFeesAadtye}}</span>
+    </div> 
+    {% endif %}
+      {% if i.IRLicenseFeesAClass != 0 %}    
+      <div class="row mx-1 ">
+        <span class="col-9">License Fees A-Class</span>
+        <span class="col-3">{{i.IRLicenseFeesAClass}}</span>
+      </div>
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">License Fees A-Class</span>
+        <span class="col-3">{{i.IRLicenseFeesAClass}}</span>
+      </div>     
+      {% endif %} 
+      {% if i.IRLicenseFeesProcessing != 0 %}      
+      <div class="row mx-1 ">
+        <span class="col-9">License Fees Processing</span>
+        <span class="col-3">{{i.IRLicenseFeesProcessing}}</span>
+      </div>
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">License Fees Processing</span>
+        <span class="col-3">{{i.IRLicenseFeesProcessing}}</span>
+      </div>   
+      {% endif %} 
+      {% if i.IRLicenseFeesHamal != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">License Fees Hamal</span>
+        <span class="col-3">{{i.IRLicenseFeesHamal}}</span>
+      </div>
+      {% else %}      
+      <div class="row mx-1 d-none">
+        <span class="col-9">License Fees Hamal</span>
+        <span class="col-3">{{i.IRLicenseFeesHamal}}</span>
+      </div>
+      {% endif %}
+      {% if i.IRLicenseRenewalFeesAadtye != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">License Renewal Fees Aadtye</span>
+        <span class="col-3">{{i.IRLicenseRenewalFeesAadtye}}</span>
+      </div>
+      {% else %}      
+      <div class="row mx-1 d-none">
+        <span class="col-9">License Renewal Fees Aadtye</span>
+        <span class="col-3">{{i.IRLicenseRenewalFeesAadtye}}</span>
+      </div>
+      {% endif %}
+      {% if i.IRLicenseRenewalFeesAClass != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">License Renewal Fees AClass</span>
+        <span class="col-3">{{i.IRLicenseRenewalFeesAClass}}</span>
+      </div>
+      {% else %}      
+      <div class="row mx-1 d-none">
+        <span class="col-9">License Renewal Fees AClass</span>
+        <span class="col-3">{{i.IRLicenseRenewalFeesAClass}}</span>
+      </div>
+      {% endif %}
+      {% if i.IRLicenseRenewalFeesProcessing != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">License Renewal Fees Processing</span>
+        <span class="col-3">{{i.IRLicenseRenewalFeesProcessing}}</span>
+      </div>
+      {% else %}      
+      <div class="row mx-1 d-none">
+        <span class="col-9">License Renewal Fees Processing</span>
+        <span class="col-3">{{i.IRLicenseRenewalFeesProcessing}}</span>
+      </div>
+      {% endif %}
+      {% if i.IRLicenseRenewalFeesHamal != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">License Renewal Fees Hamal</span>
+        <span class="col-3">{{i.IRLicenseRenewalFeesHamal}}</span>
+      </div>
+      {% else %}      
+      <div class="row mx-1 d-none">
+        <span class="col-9">License Renewal Fees Hamal</span>
+        <span class="col-3">{{i.IRLicenseRenewalFeesHamal}}</span>
+      </div>
+      {% endif %}
+      {% if i.IRPlotRent != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Plot Rent</span>
+        <span class="col-3">{{i.IRPlotRent}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Plot Rent</span>
+        <span class="col-3">{{i.IRPlotRent}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRMarketFeesMain != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Market Fees (Main)</span>
+        <span class="col-3">{{i.IRMarketFeesMain}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Market Fees (Main)</span>
+        <span class="col-3">{{i.IRMarketFeesMain}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRMarketFeesSecondary != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Market Fees (Secondary)</span>
+        <span class="col-3">{{i.IRMarketFeesSecondary}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Market Fees (Secondary)</span>
+        <span class="col-3">{{i.IRMarketFeesSecondary}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRSupervisionFees != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Supervision Fees</span>
+        <span class="col-3">{{i.IRSupervisionFees}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Supervision Fees</span>
+        <span class="col-3">{{i.IRSupervisionFees}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRFormFees != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Form Fees</span>
+        <span class="col-3">{{i.IRFormFees}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Form Fees</span>
+        <span class="col-3">{{i.IRFormFees}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRTavanPenalty != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Tavan / Penalty</span>
+        <span class="col-3">{{i.IRTavanPenalty}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Tavan / Penalty</span>
+        <span class="col-3">{{i.IRTavanPenalty}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRLateFees != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Late Fees</span>
+        <span class="col-3">{{i.IRLateFees}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Late Fees</span>
+        <span class="col-3">{{i.IRLateFees}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRLicenseFormFees != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">License Form Fees</span>
+        <span class="col-3">{{i.IRLicenseFormFees}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">License Form Fees</span>
+        <span class="col-3">{{i.IRLicenseFormFees}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRShoppingComplexRent != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Shopping Complex Rent</span>
+        <span class="col-3">{{i.IRShoppingComplexRent}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Shopping Complex Rent</span>
+        <span class="col-3">{{i.IRShoppingComplexRent}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRHishobPattiBook != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Hishob Patti Book</span>
+        <span class="col-3">{{i.IRHishobPattiBook}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Hishob Patti Book</span>
+        <span class="col-3">{{i.IRHishobPattiBook}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRBillBook != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Bill Book</span>
+        <span class="col-3">{{i.IRBillBook}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Bill Book</span>
+        <span class="col-3">{{i.IRBillBook}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRPohonchPavati != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Pohonch Pavati</span>
+        <span class="col-3">{{i.IRPohonchPavati}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Pohonch Pavati</span>
+        <span class="col-3">{{i.IRPohonchPavati}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IROtherFees != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">Other Fees</span>
+        <span class="col-3">{{i.IROtherFees}}</span>
+      </div>      
+      {% else %}
+      <div class="row mx-1 d-none">
+        <span class="col-9">Other Fees</span>
+        <span class="col-3">{{i.IROtherFees}}</span>
+      </div>      
+      {% endif %}
+      {% if i.IRNATax != 0 %}
+      <div class="row mx-1 ">
+        <span class="col-9">NA Tax</span>
+        <span class="col-3">{{i.IRNATax}}</span>
+      </div>
+      {% else %}
+            <div class="row mx-1 d-none">
+        <span class="col-9">NA Tax</span>
+        <span class="col-3">{{i.IRNATax}}</span>
+      </div>
+      {% endif %}
+
+    </details>
+</div>
+{% endfor %}
+<script src="{% static 'js/finance.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/reportfinance.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/financereport.js' %}" type="text/javascript"></script>
+{% endblock reportbodycontent %}

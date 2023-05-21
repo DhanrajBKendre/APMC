@@ -1,0 +1,90 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}Add Proprietor{%endblock title %} 
+
+{% block bodycontent %} 
+{% if user.is_staff %}
+
+<script>
+    myarr = document.getElementsByTagName("a");
+    for (let i = 0; i < myarr.length; i++) {
+        myarr[i].classList.remove("active");
+    }
+    myarr[5].classList.add("active");
+</script>
+
+{% else %}
+
+<script>
+    myarr = document.getElementsByTagName("a");
+    for (let i = 0; i < myarr.length; i++) {
+        myarr[i].classList.remove("active");
+    }
+    myarr[3].classList.add("active");
+</script>
+{% endif %}
+
+<div class="container-fluid d-flex justify-content-center">
+    <form action="/addproprietor" method="POST" class="">
+        {% csrf_token %}
+        <h2 class="text-center text-dark mb-3">Add Proprietor</h2>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="plotnumber" id="plotnumber" placeholder="Enter Plot Number"
+                class="form-control-lg w-100" />
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="plotowner" id="plotowner" placeholder="Enter Plot Owner's Name"
+                class="form-control-lg w-100" />
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="licenseholder" id="licenseholder" placeholder="Enter License Holder's Name"
+                class="form-control-lg w-100" />
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="shopname" id="shopname" placeholder="Enter Shop's Name"
+                class="form-control-lg w-100" />
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="email" name="emailid" id="emailid" placeholder="Enter Email ID"
+                class="form-control-lg w-100" />
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="phonenumber" id="phonenumber" placeholder="Enter Phone Number"
+                class="form-control-lg w-100" />
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="aadharnumber" id="aadharnumber" placeholder="Enter Aadhar Number"
+                class="form-control-lg w-100" />
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="date" name="dateofbirth" id="dateofbirth" placeholder="Enter Your DOB"
+                class="form-control-lg w-100" />
+        </div>
+        <div class="row align-items-center mb-3">
+            <div class="col-md-4">
+                <label for="licensetype" class="col-form-label-lg">License Type</label>
+            </div>
+            <div class="col-md-2">
+                <input type="checkbox" name="aadtye" id="aadtye" class="form-check-input" />
+                <label for="aadtye" class="form-check-label">Aadtye</label>
+            </div>
+            <div class="col-md-2">
+                <input type="checkbox" name="aclass" id="aclass" class="form-check-input" />
+                <label for="aclass" class="form-check-label">A-Class</label>
+            </div>
+            <div class="col-md-2">
+                <input type="checkbox" name="processing" id="processing" class="form-check-input" />
+                <label for="processing" class="form-check-label">Processing</label>
+            </div>
+            <div class="col-md-2">
+                <input type="checkbox" name="hamal" id="hamal" class="form-check-input" />
+                <label for="hamal" class="form-check-label">Hamal</label>
+            </div>
+        </div>
+        <div class="row text-center mb-3">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+{% endblock bodycontent %}

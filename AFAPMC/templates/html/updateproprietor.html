@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Update Proprietor{% endblock title %}
+{% block bodycontent %}
+{% if user.is_staff %}
+<script>
+    myarr = document.getElementsByTagName('a');
+    for (let i=0;i<myarr.length;i++){
+      myarr[i].classList.remove('active');
+    }
+   myarr[7].classList.add('active');  
+</script>
+{% else %}
+<script>
+    myarr = document.getElementsByTagName('a');
+    for (let i=0;i<myarr.length;i++){
+      myarr[i].classList.remove('active');
+    }
+   myarr[5].classList.add('active');  
+</script>
+{% endif %}
+<div class="container-fluid d-flex justify-content-center">
+    {% if i %}
+    <form action="/updateproprietor/{{i.id}}" method="POST" class="">
+        {% csrf_token %}
+        <h2 class="text-center text-dark mb-3">Update Proprietor</h2>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="upproprietorid" id="upproprietorid" placeholder="ProprietorID"
+                class="form-control-lg w-100" value={{i.PropID}} disabled>
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="upplotnumber" id="upplotnumber" placeholder="Enter Plot Number"
+                class="form-control-lg w-100" value={{i.PlotNumber}}>
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="upplotowner" id="upplotowner" placeholder="Enter Plot Owner's Name"
+                class="form-control-lg w-100" value={{i.PlotOwner}}>
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="uplicenseholder" id="uplicenseholder" placeholder="Enter License Holder's Name"
+                class="form-control-lg w-100" value={{i.LicenseHolder}}>
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="upshopname" id="upshopname" placeholder="Enter Shop's Name"
+                class="form-control-lg w-100" value={{i.ShopName}}>
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="email" name="upemailid" id="upemailid" placeholder="Enter Shop's Name"
+                class="form-control-lg w-100" value={{i.EmailID}}>
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="upphonenumber" id="upphonenumber" placeholder="Enter Shop's Name"
+                class="form-control-lg w-100" value={{i.PhoneNumber}}>
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="text" name="upaadharnumber" id="upaadharnumber" placeholder="Enter Aadhar Number"
+                class="form-control-lg w-100" value={{i.AadharNumber}}>
+        </div>
+        <div class="row align-items-center mb-3">
+            <input type="date" name="dateofbirth" id="dateofbirth" placeholder="Enter Date Of Birth"
+                class="form-control-lg w-100" value={{i.DateOfBirth}}>
+        </div>
+        <div class="row align-items-center mb-3">
+            <div class="col-md-4">
+                <label for="uplicensetype" class="col-form-label-lg">License Type</label>
+            </div>
+            <div class="col-md-2">
+                <input type="checkbox" name="upaadtye" id="upaadtye" class="form-check-input" {% if i.Aadtye == 1 %} checked {% endif %}>
+                <label for="upaadtye" class="form-check-label">Aadtye</label>
+            </div>
+            <div class="col-md-2">
+                <input type="checkbox" name="upaclass" id="upaclass" class="form-check-input" {% if i.AClass == 1 %} checked {% endif %}>
+                <label for="upaclass" class="form-check-label">A-Class</label>
+            </div>
+            <div class="col-md-2">
+                <input type="checkbox" name="upprocessing" id="upprocessing" class="form-check-input" {% if i.Processing == 1 %} checked {% endif %}>
+                <label for="upprocessing" class="form-check-label">Processing</label>
+            </div>
+            <div class="col-md-2">
+                <input type="checkbox" name="uphamal" id="uphamal" class="form-check-input" {% if i.Hamal == 1 %} checked {% endif %}>
+                <label for="uphamal" class="form-check-label">Hamal</label>
+            </div>
+        </div>
+        <div class="row text-center mb-3">
+            <button class="btn btn-success" type="submit">
+                Update
+            </button>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock bodycontent %}
